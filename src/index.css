@@ -1,34 +1,207 @@
+/* Global Variables for consistency */
 :root {
-  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
-  line-height: 1.5;
-  font-weight: 400;
-
-  color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
-
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  --primary-blue: #3b82f6;
+  --primary-blue-hover: #2563eb;
+  --primary-green: #16a34a;
+  --primary-green-hover: #15803d;
+  --secondary-green: #166534;
+  --light-green-bg: #ecfdf5;
+  --light-gray-bg: #f3f4f6;
+  --border-radius: 12px;
+  --transition-speed: 0.3s;
+  --shadow-light: 0 4px 6px rgba(0, 0, 0, 0.1);
+  --shadow-hover: 0 8px 16px rgba(0, 0, 0, 0.2);
 }
 
-body {
-  margin: 0;
+/* Start Page */
+.start-container {
   display: flex;
-  place-items: center;
-  min-width: 320px;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
   min-height: 100vh;
+  background-color: var(--light-gray-bg);
+  padding: 20px;
+  text-align: center;
 }
 
-h1 {
-  font-size: 3.2em;
-  line-height: 1.1;
+.start-title {
+  margin-bottom: 32px;
+  font-size: 2.5rem;
+  font-weight: bold;
+  color: var(--primary-blue);
 }
 
-@media (prefers-color-scheme: light) {
-  :root {
-    color: #213547;
-    background-color: #ffffff;
+.start-input,
+.start-select {
+  margin-bottom: 16px;
+  padding: 12px;
+  border: 1px solid #d1d5db;
+  border-radius: var(--border-radius);
+  width: 220px;
+  font-size: 1rem;
+  transition:
+    border-color var(--transition-speed),
+    box-shadow var(--transition-speed);
+}
+
+.start-input:focus,
+.start-select:focus {
+  outline: none;
+  border-color: var(--primary-blue);
+  box-shadow: 0 0 8px rgba(59, 130, 246, 0.3);
+}
+
+.start-button {
+  padding: 12px 28px;
+  border: none;
+  border-radius: var(--border-radius);
+  background-color: var(--primary-blue);
+  color: white;
+  font-size: 1rem;
+  cursor: pointer;
+  transition:
+    background-color var(--transition-speed),
+    box-shadow var(--transition-speed);
+}
+
+.start-button:hover {
+  background-color: var(--primary-blue-hover);
+  box-shadow: var(--shadow-hover);
+}
+
+/* Game Page */
+.game-container {
+  padding: 20px;
+}
+
+.game-header {
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.game-player,
+.game-timer {
+  font-size: 1.25rem;
+  font-weight: 600;
+}
+
+.game-grid {
+  display: grid;
+  gap: 10px;
+}
+
+/* End Page */
+.end-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  background-color: var(--light-green-bg);
+  padding: 20px;
+  text-align: center;
+}
+
+.end-title {
+  margin-bottom: 24px;
+  font-size: 2.5rem;
+  font-weight: bold;
+  color: var(--secondary-green);
+}
+
+.end-message,
+.end-timer {
+  margin-bottom: 16px;
+  font-size: 1.25rem;
+}
+
+.highlight {
+  font-weight: 600;
+  color: var(--primary-green);
+}
+
+.bold {
+  font-weight: bold;
+}
+
+.play-again-button {
+  padding: 12px 28px;
+  border: none;
+  border-radius: var(--border-radius);
+  background-color: var(--primary-green);
+  color: white;
+  font-size: 1rem;
+  cursor: pointer;
+  transition:
+    background-color var(--transition-speed),
+    box-shadow var(--transition-speed);
+}
+
+.play-again-button:hover {
+  background-color: var(--primary-green-hover);
+  box-shadow: var(--shadow-hover);
+}
+
+/* Tile Styles */
+.tile-container {
+  perspective: 1000px;
+  width: 80px;
+  height: 80px;
+  cursor: pointer;
+  transition: transform var(--transition-speed);
+}
+
+@media (min-width: 640px) {
+  .tile-container {
+    width: 96px;
+    height: 96px;
   }
+}
+
+.tile-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transform-style: preserve-3d;
+  transition: transform var(--transition-speed);
+}
+
+.tile-inner.flipped {
+  transform: rotateY(180deg);
+}
+
+.tile-back,
+.tile-front {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  border-radius: var(--border-radius);
+  background-color: white;
+  box-shadow: var(--shadow-light);
+  backface-visibility: hidden;
+  overflow: hidden;
+  transition: box-shadow var(--transition-speed);
+}
+
+.tile-back:hover,
+.tile-front:hover {
+  box-shadow: var(--shadow-hover);
+}
+
+.tile-front {
+  transform: rotateY(180deg);
+}
+
+.tile-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.2s ease-in-out;
+}
+
+.tile-image:hover {
+  transform: scale(1.05);
 }
