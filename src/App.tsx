@@ -1,4 +1,3 @@
-import growyLogo from '/growy_logo.svg'
 import './App.css'
 import Router from './router'
 
